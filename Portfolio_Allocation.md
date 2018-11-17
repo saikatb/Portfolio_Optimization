@@ -566,6 +566,8 @@ cumulative_return
 ```
     179.76281585698382
 
+**Sharpe Ratio**
+
 ```python
 SR = all_post_vals['Daily_Return'].mean() / all_post_vals['Daily_Return'].std()
 SR
