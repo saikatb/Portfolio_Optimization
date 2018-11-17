@@ -35,20 +35,7 @@ combine_close.columns = ['AAPL_CLose', 'CSCO_Close', 'IBM_Close', 'AMZN_Close', 
 combine_close.head()
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -114,34 +101,16 @@ combine_close.head()
 </div>
 
 
-
-
 ```python
 combine_close.plot(figsize=(15,6), legend=True)
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0xa1ce5b0>
-
-
-
-
 ![png](output_5_1.png)
-
 
 
 ```python
 AAPL.iloc[0]['Adj Close']
 ```
-
-
-
-
     63.0568962097168
-
-
 
 
 ```python
@@ -149,28 +118,9 @@ for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
     stock_df['Normed Return'] = stock_df['Adj Close'] / stock_df.iloc[0]['Adj Close']
 ```
 
-
 ```python
 AMZN.head()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -250,35 +200,15 @@ AMZN.head()
 </div>
 
 
-
-
 ```python
 for stock_df, allo in zip((AAPL,CSCO,IBM,AMZN,FB),[0.4,0.2,0.1,0.05,0.25]):
     stock_df['Allocation'] = stock_df['Normed Return']*allo
 ```
 
-
 ```python
 AAPL.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
