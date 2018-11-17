@@ -369,7 +369,6 @@ all_post_vals.head()
 all_post_vals['Total_Pos'] = all_post_vals.sum(axis=1)
 all_post_vals.head()
 ```
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -535,6 +534,7 @@ all_post_vals.head()
 
 
 **Mean Daily Return**
+
 ```python
 all_post_vals['Daily_Return'].mean()
 ```
@@ -566,7 +566,7 @@ cumulative_return
 ```
     179.76281585698382
 
-**Sharpe Ratio**
+**Sharpe Ratio** Or **SR**
 
 ```python
 SR = all_post_vals['Daily_Return'].mean() / all_post_vals['Daily_Return'].std()
@@ -659,6 +659,7 @@ combine_close.pct_change(1).corr()
 </table>
 </div>
 
+**Log Return** of **Combine_Close** dataframe.
 
 ```python
 log_ret = np.log(combine_close/combine_close.shift(1))
@@ -735,11 +736,9 @@ plt.tight_layout()
 ```
 ![png](output_27_0.png)
 
-
 ```python
 log_ret.mean()
 ```
-
     AAPL_CLose    0.000891
     CSCO_Close    0.000746
     IBM_Close    -0.000178
@@ -810,7 +809,6 @@ log_ret.corr()
 ```python
 log_ret.cov() * 252
 ```
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -866,7 +864,6 @@ log_ret.cov() * 252
   </tbody>
 </table>
 </div>
-
 
 
 
