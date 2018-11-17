@@ -98,12 +98,14 @@ combine_close.head()
 </table>
 </div>
 
+Below is the plot of *combine_close* dataframe which includes below mentioned share prices.
 
 ```python
 combine_close.plot(figsize=(15,6), legend=True)
 ```
 ![png](output_5_1.png)
 
+**Normed Return** column has been added
 
 ```python
 for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
@@ -187,12 +189,12 @@ for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
 </table>
 </div>
 
+Column **ALLocation** has been added
 
 ```python
 for stock_df, allo in zip((AAPL,CSCO,IBM,AMZN,FB),[0.4,0.2,0.1,0.05,0.25]):
     stock_df['Allocation'] = stock_df['Normed Return']*allo
 ```
-
 ```python
 AAPL.head()
 ```
@@ -282,13 +284,14 @@ AAPL.head()
 </div>
 
 
-
+Below is the allocation of the stocks in 1 million. 
 
 ```python
 for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
     stock_df['Position Values'] = stock_df['Allocation'] * 100000
 ```
 
+Below is the dataframe with the **Position Values** of all the stocks.
 
 ```python
 all_post_vals = pd.concat([AAPL['Position Values'],CSCO['Position Values'],IBM['Position Values'],AMZN['Position Values'],FB['Position Values']],axis=1)
@@ -296,23 +299,6 @@ all_post_vals.columns = ['AAPL_Pos','CSCO_Pos','IBM_Pos','AMZN_Pos','FB_Pos']
 all_post_vals.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -377,31 +363,13 @@ all_post_vals.head()
 </table>
 </div>
 
-
-
+**Total_Pos** has been calculated and added to the dataframe. The updated dataframe is as below. 
 
 ```python
 all_post_vals['Total_Pos'] = all_post_vals.sum(axis=1)
 all_post_vals.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -474,46 +442,19 @@ all_post_vals.head()
 </div>
 
 
-
-
 ```python
 all_post_vals.plot(figsize=(15,8),legend=True)
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0xa282a30>
-
-
-
-
 ![png](output_14_1.png)
 
-
+**Daily_Return** column has been added to the dataframe as mentioned below.
 
 ```python
 all_post_vals['Daily_Return'] = all_post_vals['Total_Pos'].pct_change(1)
 all_post_vals.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -593,30 +534,18 @@ all_post_vals.head()
 </div>
 
 
-
-
+**Mean Daily Return**
 ```python
 all_post_vals['Daily_Return'].mean()
 ```
-
-
-
-
     0.0008893457138927286
 
-
-
+**Daily Return STD**
 
 ```python
 all_post_vals['Daily_Return'].std()
 ```
-
-
-
-
     0.011980234191627082
-
-
 
 
 ```python
