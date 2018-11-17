@@ -950,9 +950,9 @@ sharpe_arr.max()
 max_sr_ret = ret_arr[sharpe_arr.argmax()]
 max_sr_vol = vol_arr[sharpe_arr.argmin()]
 max_sr_ret,max_sr_vol
-```
 
     (0.2350640678040358, 0.1709076354614955)
+```
 
 ```python
 plt.figure(figsize=(15,8))
@@ -962,7 +962,7 @@ plt.xlabel('Volatility')
 plt.ylabel('Return')
 
 plt.scatter(max_sr_vol,max_sr_ret,c='red',s=70,edgecolors='black')
-
+```
 ![png](output_35_1.png)
 
 
@@ -977,7 +977,6 @@ def get_ret_vol_sr(weights):
 
 ```python
 (log_ret.mean()* weights)
-```
 
     AAPL_CLose    0.000193
     CSCO_Close    0.000105
@@ -985,11 +984,11 @@ def get_ret_vol_sr(weights):
     AMZN_Close    0.000331
     FB_Close      0.000143
     dtype: float64
+```
 
 ```python
 weights
 ```
-
     array([0.2168907 , 0.1407422 , 0.19688306, 0.28362231, 0.16186173])
 
 ```python
