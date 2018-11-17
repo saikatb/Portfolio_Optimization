@@ -34,8 +34,6 @@ combine_close = pd.concat([AAPL['Adj Close'],CSCO['Adj Close'],IBM['Adj Close'],
 combine_close.columns = ['AAPL_CLose', 'CSCO_Close', 'IBM_Close', 'AMZN_Close', 'FB_Close']
 combine_close.head()
 ```
-
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -108,18 +106,8 @@ combine_close.plot(figsize=(15,6), legend=True)
 
 
 ```python
-AAPL.iloc[0]['Adj Close']
-```
-    63.0568962097168
-
-
-```python
 for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
     stock_df['Normed Return'] = stock_df['Adj Close'] / stock_df.iloc[0]['Adj Close']
-```
-
-```python
-AMZN.head()
 ```
 <table border="1" class="dataframe">
   <thead>
@@ -208,7 +196,6 @@ for stock_df, allo in zip((AAPL,CSCO,IBM,AMZN,FB),[0.4,0.2,0.1,0.05,0.25]):
 ```python
 AAPL.head()
 ```
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
