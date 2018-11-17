@@ -1,4 +1,7 @@
 
+In this project, an effort has been made in order to figure out the best portfolio by maximizing a portfolios expected return. The same had been accomplished by reducing the negative sharpe ratio as much as possible.
+
+Below python libraries have been imported.
 
 ```python
 import quandl
@@ -11,38 +14,26 @@ from __future__ import division
 from pandas import Series,DataFrame
 sns.set_style('whitegrid')
 %matplotlib inline
-
-import matplotlib.pyplot as plt
 ```
-
-
-```python
-from datetime import datetime
-```
-
+A portfoilio of technical stocks have beem made up using data reader libraries of python
 
 ```python
 from datetime import datetime
 bank_list = ['AAPL','CSCO','IBM','AMZN','FB']
 end = datetime.now()
 start = datetime(end.year-5,end.month,end.day)
-```
 
-
-```python
 for x in bank_list:
     globals()[x] = wb.DataReader(x,'yahoo',start,end)
 ```
 
+**combine_close** is the dataframe which is the ammalgamation of the close price of all other stocks. The same is known as 
 
 ```python
 combine_close = pd.concat([AAPL['Adj Close'],CSCO['Adj Close'],IBM['Adj Close'],AMZN['Adj Close'],FB['Adj Close']],axis=1)
 combine_close.columns = ['AAPL_CLose', 'CSCO_Close', 'IBM_Close', 'AMZN_Close', 'FB_Close']
 combine_close.head()
 ```
-
-
-
 
 <div>
 <style scoped>
