@@ -540,7 +540,7 @@ all_post_vals['Daily_Return'].mean()
 ```
     0.0008893457138927286
 
-**Daily Return STD**
+**Standard deviation** of the **Daily_Return**
 
 ```python
 all_post_vals['Daily_Return'].std()
@@ -551,31 +551,11 @@ all_post_vals['Daily_Return'].std()
 ```python
 all_post_vals['Daily_Return'].plot(kind='hist', bins=100, figsize=(15,6))
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0xa1d7050>
-
-
-
-
 ![png](output_18_1.png)
-
-
 
 ```python
 all_post_vals['Daily_Return'].plot(kind='kde', figsize=(15,6))
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0xb72ce30>
-
-
-
-
 ![png](output_19_1.png)
 
 
@@ -584,52 +564,29 @@ all_post_vals['Daily_Return'].plot(kind='kde', figsize=(15,6))
 cumulative_return = 100*(all_post_vals['Total_Pos'][-1]/all_post_vals['Total_Pos'][0] - 1)
 cumulative_return
 ```
-
-
-
-
     179.76281585698382
-
-
-
 
 ```python
 SR = all_post_vals['Daily_Return'].mean() / all_post_vals['Daily_Return'].std()
 SR
 ```
-
-
-
-
     0.07423441809796066
-
-
-
+    
+**Anual Sharpe Ratio** OR **ASR**
 
 ```python
 ASR = (252**0.5)*SR
 ASR
 ```
-
-
-
-
     1.1784348540527785
-
-
-
 
 ```python
 #########################################################################################################################
 ```
 
-
 ```python
 combine_close.head(), combine_close.shape
 ```
-
-
-
 
     (            AAPL_CLose  CSCO_Close   IBM_Close  AMZN_Close   FB_Close
      Date                                                                 
@@ -640,30 +597,10 @@ combine_close.head(), combine_close.shape
      2013-11-22   63.199150   18.273592  149.472977  372.309998  46.230000,
      (1260, 5))
 
-
-
-
 ```python
 combine_close.pct_change(1).corr()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -721,30 +658,10 @@ combine_close.pct_change(1).corr()
 </div>
 
 
-
-
 ```python
 log_ret = np.log(combine_close/combine_close.shift(1))
 log_ret.head()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -810,24 +727,16 @@ log_ret.head()
 </div>
 
 
-
-
 ```python
 log_ret.hist(bins=100, figsize=(15,10))
 plt.tight_layout()
 ```
-
-
 ![png](output_27_0.png)
-
 
 
 ```python
 log_ret.mean()
 ```
-
-
-
 
     AAPL_CLose    0.000891
     CSCO_Close    0.000746
@@ -836,30 +745,9 @@ log_ret.mean()
     FB_Close      0.000884
     dtype: float64
 
-
-
-
 ```python
 log_ret.corr()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -917,29 +805,10 @@ log_ret.corr()
 </div>
 
 
-
-
 ```python
 log_ret.cov() * 252
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1039,12 +908,7 @@ SR
     Sharpe Ratio:
     
 
-
-
-
     1.1363366622835256
-
-
 
 
 ```python
@@ -1077,18 +941,11 @@ for ind in range(num_ports):
 
 ```
 
-
 ```python
 sharpe_arr.max()
 ```
 
-
-
-
     1.2355514740024416
-
-
-
 
 ```python
 max_sr_ret = ret_arr[sharpe_arr.argmax()]
@@ -1096,13 +953,7 @@ max_sr_vol = vol_arr[sharpe_arr.argmin()]
 max_sr_ret,max_sr_vol
 ```
 
-
-
-
     (0.2350640678040358, 0.1709076354614955)
-
-
-
 
 ```python
 plt.figure(figsize=(15,8))
@@ -1113,18 +964,7 @@ plt.ylabel('Return')
 
 plt.scatter(max_sr_vol,max_sr_ret,c='red',s=70,edgecolors='black')
 
-```
-
-
-
-
-    <matplotlib.collections.PathCollection at 0xbc7d830>
-
-
-
-
 ![png](output_35_1.png)
-
 
 
 ```python
@@ -1136,13 +976,9 @@ def get_ret_vol_sr(weights):
     return np.array([ret,vol,sr])
 ```
 
-
 ```python
 (log_ret.mean()* weights)
 ```
-
-
-
 
     AAPL_CLose    0.000193
     CSCO_Close    0.000105
@@ -1151,20 +987,11 @@ def get_ret_vol_sr(weights):
     FB_Close      0.000143
     dtype: float64
 
-
-
-
 ```python
 weights
 ```
 
-
-
-
     array([0.2168907 , 0.1407422 , 0.19688306, 0.28362231, 0.16186173])
-
-
-
 
 ```python
 from scipy.optimize import minimize
@@ -1194,18 +1021,13 @@ bounds = ((0,1),(0,1),(0,1),(0,1),(0,1))
 init_guess = [0.167,0.167,0.167,0.167,0.167]
 ```
 
-
 ```python
 opt_results = minimize(neg_sharpe,init_guess,method='SLSQP',bounds=bounds,constraints=cons)
 ```
 
-
 ```python
 opt_results
 ```
-
-
-
 
          fun: -1.2387076283524874
          jac: array([ 6.84857368e-05, -2.71201134e-05,  8.09275717e-01,  8.29994678e-05,
@@ -1218,43 +1040,25 @@ opt_results
      success: True
            x: array([0.32436184, 0.32213967, 0.        , 0.28301982, 0.07047867])
 
-
-
-
 ```python
 opt_results.x
 ```
 
-
-
-
     array([0.32436184, 0.32213967, 0.        , 0.28301982, 0.07047867])
-
-
-
 
 ```python
 get_ret_vol_sr(opt_results.x)
 ```
-
-
-
-
     array([0.23234145, 0.18756763, 1.23870763])
-
-
-
 
 ```python
 frontier_y = np.linspace(0,0.3,100)
 ```
 
-
 ```python
 def minimize_volatility(weights):
     return get_ret_vol_sr(weights)[1]
 ```
-
 
 ```python
 frontier_volatility = []
@@ -1268,7 +1072,6 @@ for possible_return in frontier_y:
     frontier_volatility.append(result['fun'])
 ```
 
-
 ```python
 plt.figure(figsize=(15,8))
 plt.scatter(vol_arr,ret_arr,c=sharpe_arr,cmap='plasma')
@@ -1278,14 +1081,4 @@ plt.ylabel('Return')
 
 plt.plot(frontier_volatility,frontier_y,'g--',linewidth=3)
 ```
-
-
-
-
-    [<matplotlib.lines.Line2D at 0x6eec810>]
-
-
-
-
 ![png](output_51_1.png)
-
