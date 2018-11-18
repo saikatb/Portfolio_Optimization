@@ -537,16 +537,17 @@ all_post_vals.head()
 
 ```python
 all_post_vals['Daily_Return'].mean()
-```
+
     0.0008893457138927286
+```
 
 **Standard deviation** of the **Daily_Return**
 
 ```python
 all_post_vals['Daily_Return'].std()
-```
-    0.011980234191627082
 
+    0.011980234191627082
+```
 
 ```python
 all_post_vals['Daily_Return'].plot(kind='hist', bins=100, figsize=(15,6))
@@ -563,34 +564,33 @@ all_post_vals['Daily_Return'].plot(kind='kde', figsize=(15,6))
 ```python
 cumulative_return = 100*(all_post_vals['Total_Pos'][-1]/all_post_vals['Total_Pos'][0] - 1)
 cumulative_return
-```
-    179.76281585698382
 
+    179.76281585698382
+```
 **Sharpe Ratio** Or **SR**
 
 ```python
 SR = all_post_vals['Daily_Return'].mean() / all_post_vals['Daily_Return'].std()
 SR
-```
     0.07423441809796066
-    
+```
+
 **Anual Sharpe Ratio** OR **ASR**
 
 ```python
 ASR = (252**0.5)*SR
 ASR
-```
-    1.1784348540527785
 
-```python
-#########################################################################################################################
+    1.1784348540527785
 ```
+
+Below is the details of the dataframe **combine_close**
+
 
 ```python
 combine_close.head(), combine_close.shape
-```
 
-    (            AAPL_CLose  CSCO_Close   IBM_Close  AMZN_Close   FB_Close
+(            AAPL_CLose  CSCO_Close   IBM_Close  AMZN_Close   FB_Close
      Date                                                                 
      2013-11-18   63.056896   18.128832  152.086441  366.179993  45.830002
      2013-11-19   63.168758   18.239531  152.729507  364.940002  46.360001
@@ -598,10 +598,12 @@ combine_close.head(), combine_close.shape
      2013-11-21   63.362068   18.282106  151.806137  368.920013  46.700001
      2013-11-22   63.199150   18.273592  149.472977  372.309998  46.230000,
      (1260, 5))
+```
+
+**Pearson correlation coefficient** among different returns of the different technical stocks in the portfolio.
 
 ```python
 combine_close.pct_change(1).corr()
-```
 
 <table border="1" class="dataframe">
   <thead>
@@ -658,6 +660,7 @@ combine_close.pct_change(1).corr()
   </tbody>
 </table>
 </div>
+```
 
 **Log Return** of **Combine_Close** dataframe.
 
@@ -729,6 +732,7 @@ log_ret.head()
 </table>
 </div>
 
+Below is the layout of the histogram of different stocks' logarithmic returns.
 
 ```python
 log_ret.hist(bins=100, figsize=(15,10))
@@ -805,6 +809,7 @@ log_ret.corr()
 </table>
 </div>
 
+Pairwise cov of the logarithmic return of different stocks for 252 business days.
 
 ```python
 log_ret.cov() * 252
@@ -865,7 +870,8 @@ log_ret.cov() * 252
 </table>
 </div>
 
-
+Using below script we allocate random weights which eeventually adds upto 1
+After that **expected return** and **expected volatility** has been calculated with a view to derive **sharpe ratio**
 
 ```python
 np.random.seed(101)
@@ -895,7 +901,7 @@ print('Sharpe Ratio:')
 SR = exp_ret/exp_vol
 SR
 
-```
+
 
     Index(['AAPL_CLose', 'CSCO_Close', 'IBM_Close', 'AMZN_Close', 'FB_Close'], dtype='object')
     Random Weights:
@@ -905,10 +911,8 @@ SR
     Expected Portfolio Return:
     Expected Volatility:
     Sharpe Ratio:
-    
-
     1.1363366622835256
-
+```
 
 ```python
 np.random.seed(102)
