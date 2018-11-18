@@ -604,7 +604,7 @@ combine_close.head(), combine_close.shape
 
 ```python
 combine_close.pct_change(1).corr()
-
+```
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
