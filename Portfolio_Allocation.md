@@ -105,7 +105,7 @@ combine_close.plot(figsize=(15,6), legend=True)
 ```
 ![png](output_5_1.png)
 
-**Normed Return** column has been added
+**Normed Return** column has been added to the dataframe **stock_df**
 
 ```python
 for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
@@ -189,15 +189,14 @@ for stock_df in (AAPL,CSCO,IBM,AMZN,FB):
 </table>
 </div>
 
-Column **ALLocation** has been added
+Column **ALLocation** has been added with a view to calculate the allocation of the stocks in the portfolio.
 
 ```python
 for stock_df, allo in zip((AAPL,CSCO,IBM,AMZN,FB),[0.4,0.2,0.1,0.05,0.25]):
     stock_df['Allocation'] = stock_df['Normed Return']*allo
-```
-```python
 AAPL.head()
 ```
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -363,7 +362,8 @@ all_post_vals.head()
 </table>
 </div>
 
-**Total_Pos** has been calculated and added to the dataframe. The updated dataframe is as below. 
+**Total_Pos** has been calculated and added to the dataframe. 
+The updated dataframe is as below. 
 
 ```python
 all_post_vals['Total_Pos'] = all_post_vals.sum(axis=1)
@@ -447,7 +447,8 @@ all_post_vals.plot(figsize=(15,8),legend=True)
 
 ![png](output_14_1.png)
 
-**Daily_Return** column has been added to the dataframe as mentioned below.
+**Daily_Return** column has been added to the dataframe as mentioned below. 
+**Daily_Return** is the daily return of the stocks in a dataframe.
 
 ```python
 all_post_vals['Daily_Return'] = all_post_vals['Total_Pos'].pct_change(1)
@@ -541,7 +542,7 @@ all_post_vals['Daily_Return'].mean()
     0.0008893457138927286
 ```
 
-**Standard deviation** of the **Daily_Return**
+**Standard deviation** of the **Daily_Return** of the dataframe **all_post_vals**
 
 ```python
 all_post_vals['Daily_Return'].std()
@@ -551,15 +552,20 @@ all_post_vals['Daily_Return'].std()
 
 ```python
 all_post_vals['Daily_Return'].plot(kind='hist', bins=100, figsize=(15,6))
-```
+
 ![png](output_18_1.png)
+```
+
+
+Below is the *Kernel Density Estimation* plot of all position values' **Daily_Return**.
 
 ```python
 all_post_vals['Daily_Return'].plot(kind='kde', figsize=(15,6))
-```
+
 ![png](output_19_1.png)
+```
 
-
+This is the *cumulative return* of the portfolio
 
 ```python
 cumulative_return = 100*(all_post_vals['Total_Pos'][-1]/all_post_vals['Total_Pos'][0] - 1)
@@ -567,7 +573,7 @@ cumulative_return
 
     179.76281585698382
 ```
-**Sharpe Ratio** Or **SR**
+**Sharpe Ratio** Or *SR* is the average return earned in excess of the *risk free rate* per unit of voliatlity or total risk.
 
 ```python
 SR = all_post_vals['Daily_Return'].mean() / all_post_vals['Daily_Return'].std()
@@ -575,17 +581,16 @@ SR
     0.07423441809796066
 ```
 
-**Anual Sharpe Ratio** OR **ASR**
+**Anualized Sharpe Ratio** OR **ASR**
+*Anualized Sharpe Ratio* is *annualized excess returns* over the risk-free rate by its annualized standard deviation.
 
 ```python
 ASR = (252**0.5)*SR
 ASR
-
     1.1784348540527785
 ```
 
-Below is the details of the dataframe **combine_close**
-
+Below is the details of the dataframe **combine_close** which contains all the *Close* share price.
 
 ```python
 combine_close.head(), combine_close.shape
