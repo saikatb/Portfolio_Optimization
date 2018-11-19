@@ -665,7 +665,6 @@ combine_close.pct_change(1).corr()
   </tbody>
 </table>
 </div>
-```
 
 **Log Return** of **Combine_Close** dataframe.
 
@@ -745,6 +744,8 @@ plt.tight_layout()
 ```
 ![png](output_27_0.png)
 
+Below is the mean log return of the individual stocks.
+
 ```python
 log_ret.mean()
 ```
@@ -754,6 +755,8 @@ log_ret.mean()
     AMZN_Close    0.001168
     FB_Close      0.000884
     dtype: float64
+
+Below is the correlation coefficient or corr of below log returns.
 
 ```python
 log_ret.corr()
@@ -875,7 +878,7 @@ log_ret.cov() * 252
 </table>
 </div>
 
-Using below script we allocate random weights which eeventually adds upto 1
+Using below script we allocate random weights which eventually adds upto 1
 After that **expected return** and **expected volatility** has been calculated with a view to derive **sharpe ratio**
 
 ```python
