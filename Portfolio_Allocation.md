@@ -985,8 +985,7 @@ plt.scatter(max_sr_vol,max_sr_ret,c='red',s=70,edgecolors='black')
 ```
 ![png](output_35_1.png)
 
-
-
+The function get_ret_vol_sr created below will return **retrun, volatility and sharpe ratio**
 
 ```python
 def get_ret_vol_sr(weights):
@@ -997,32 +996,18 @@ def get_ret_vol_sr(weights):
     return np.array([ret,vol,sr])
 ```
 
-```python
-(log_ret.mean()* weights)
-
-    AAPL_CLose    0.000193
-    CSCO_Close    0.000105
-    IBM_Close    -0.000035
-    AMZN_Close    0.000331
-    FB_Close      0.000143
-    dtype: float64
-```
-
-```python
-weights
-```
-    array([0.2168907 , 0.1407422 , 0.19688306, 0.28362231, 0.16186173])
+Below is the minimize function 
 
 ```python
 from scipy.optimize import minimize
 ```
 
+Below is the function for the **Negative Sharpe Ratio**
 
 ```python
 def neg_sharpe(weights):
     return get_ret_vol_sr(weights)[2] * -1
 ```
-
 
 ```python
 def check_sum(weights):
@@ -1034,20 +1019,22 @@ def check_sum(weights):
 ```python
 cons = ({'type':'eq','fun':check_sum})
 ```
-
+Below are the bounds and initial guess
 
 ```python
 bounds = ((0,1),(0,1),(0,1),(0,1),(0,1))
 init_guess = [0.167,0.167,0.167,0.167,0.167]
 ```
+Using below minimize function we are trying to minimize the **negative sharpe ratio.** 
 
 ```python
 opt_results = minimize(neg_sharpe,init_guess,method='SLSQP',bounds=bounds,constraints=cons)
 ```
 
+
 ```python
 opt_results
-```
+
 
          fun: -1.2387076283524874
          jac: array([ 6.84857368e-05, -2.71201134e-05,  8.09275717e-01,  8.29994678e-05,
@@ -1059,17 +1046,27 @@ opt_results
       status: 0
      success: True
            x: array([0.32436184, 0.32213967, 0.        , 0.28301982, 0.07047867])
+```
+In order to find the minimized function we can go for the below command
 
 ```python
 opt_results.x
-```
 
     array([0.32436184, 0.32213967, 0.        , 0.28301982, 0.07047867])
+```
+And in order to get the daily return, volatility and sharpe ratio we passed **opt_results.x** through the function get_rel_vol_sr.
+Below are the optimal results.
 
 ```python
 get_ret_vol_sr(opt_results.x)
-```
+
     array([0.23234145, 0.18756763, 1.23870763])
+```
+
+After that we will be checking all optimal portfolios which is also known as the **Efficient Frontier**.
+Efficient frontier is the set of all the **optimal portfolios** that offers *highest ecxpected return* for a defined level of risk or the lowest risk possible for a given level of **Expected Return**.
+
+We are going to optimize each of the y values for each of the x values.
 
 ```python
 frontier_y = np.linspace(0,0.3,100)
