@@ -909,7 +909,7 @@ print('Sharpe Ratio:')
 SR = exp_ret/exp_vol
 SR
 
-
+```
 
     Index(['AAPL_CLose', 'CSCO_Close', 'IBM_Close', 'AMZN_Close', 'FB_Close'], dtype='object')
     Random Weights:
@@ -920,7 +920,9 @@ SR
     Expected Volatility:
     Sharpe Ratio:
     1.1363366622835256
-```
+
+
+In order to repeat the above script thousands of times, we reiterated the script for **5000 times** 
 
 ```python
 np.random.seed(102)
@@ -952,11 +954,14 @@ for ind in range(num_ports):
 
 ```
 
+Below is the maximum **sharpe ratio**
+
 ```python
 sharpe_arr.max()
 ```
-
     1.2355514740024416
+
+**max_sr_ret & max_sr_vol** are the respective return and volatility array at those indexes which can be found using **sharpe_arr.argmax() & sharpe_arr.argmin()**
 
 ```python
 max_sr_ret = ret_arr[sharpe_arr.argmax()]
@@ -965,6 +970,9 @@ max_sr_ret,max_sr_vol
 
     (0.2350640678040358, 0.1709076354614955)
 ```
+Below curve is the bullet curve which is also known as **efficient frontier**. The same is the plot in between **return** and **volatility** colored by the **sharpe ratio**.
+
+The **red dot** is the dot of the **maximum return and volatility** colored by color **red** and edgecolor **black**
 
 ```python
 plt.figure(figsize=(15,8))
@@ -976,6 +984,8 @@ plt.ylabel('Return')
 plt.scatter(max_sr_vol,max_sr_ret,c='red',s=70,edgecolors='black')
 ```
 ![png](output_35_1.png)
+
+
 
 
 ```python
